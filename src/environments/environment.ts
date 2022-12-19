@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  main_url: 'http://localhost:8000'
+  api_main_url: 'http://localhost:8000/api',
+  resources: {
+    main_group: '/organizations/group/',
+    profile: '/user/profile/'
+  }
 };
 
 /*
@@ -15,3 +19,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+  

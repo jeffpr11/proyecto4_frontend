@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserCredentials } from '../../entities/UserCredentials';
+import { UserCredentials } from '../../interfaces/user.credentials.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +28,16 @@ export class AuthService {
     return new Promise( (res, rej) => {
 
       this.http.post(
-        `${environment.main_url}/api/token/`, user, this.httpOptions)
-        .subscribe(
-          (token: any) => {
+        `${environment.api_main_url}/token/`, user, this.httpOptions)
+        .subscribe({
+          next: (token: any) => {
 
             this.setData(token.token);
             res("Login Success!");
             this.router.navigate([next]);
             
-        }, err => rej(err.error));
+          }, error: (err) => rej(err.error)
+      });
 
     });
 
@@ -48,6 +49,7 @@ export class AuthService {
     localStorage.removeItem("name");
     localStorage.removeItem("token");
     localStorage.removeItem("roles");
+    localStorage.removeItem("username");
 
   }
 
@@ -63,6 +65,7 @@ export class AuthService {
     localStorage.setItem("token", token);
     localStorage.setItem("exp", payload.exp);
     localStorage.setItem("name", payload.name);
+    localStorage.setItem("username", payload.name);
     localStorage.setItem("roles", payload.roles ? payload.roles : []);
 
   }
