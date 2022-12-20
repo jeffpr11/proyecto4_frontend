@@ -16,6 +16,14 @@ const routes: Routes = [
         loadChildren: () => import('./ministerios/ministerios.module').then(m => m.MinisteriosModule),
       },
       {
+        path: 'usuarios',
+        loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+      },
+      {
+        path: 'eventos',
+        loadChildren: () => import('./events/events.module').then(m => m.EventsModule),
+      },
+      {
         path: 'dashboard',
         component: DashboardComponent
       },

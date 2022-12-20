@@ -1,5 +1,28 @@
 
+.loader > img {
+
+    opacity: .7;
+    animation: rotation 1.6s infinite linear;
+
+}
+
 .ministry-card {
 
     transition: transform 0.5s;
+}
+
+.ministry-card:hover {
+
+    transform: scale(1.05);
+
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
 }

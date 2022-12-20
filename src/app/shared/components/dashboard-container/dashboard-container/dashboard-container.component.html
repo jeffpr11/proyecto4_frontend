@@ -17,7 +17,7 @@
           <a routerLink="/" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="#" class="nav-link">Contacto</a>
         </li>
       </ul>
   
@@ -211,7 +211,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a routerLink="/eventos" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon fas fa-calendar-check"></i>
                 <p>
                   Eventos
@@ -219,7 +219,7 @@
               </a>
             </li>
             <li class="nav-item" hasRole [role]="'superuser'">
-              <a href="pages/widgets.html" class="nav-link">
+              <a routerLink="/usuarios" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Usuarios

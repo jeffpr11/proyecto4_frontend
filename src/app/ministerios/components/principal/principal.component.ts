@@ -11,13 +11,20 @@ import { GroupService } from '../../services/ministry/group.service';
 })
 export class PrincipalComponent implements OnInit {
 
+  loader: boolean;
   ministries: Ministry[];
   constructor(private groupService: GroupService) { }
 
   ngOnInit(): void {
 
+    this.loader = true;
     this.groupService.getMainGroups().subscribe({
-      next: (page: Paginator<Ministry>) => this.ministries = page.results,
+      next: (page: Paginator<Ministry>) => {
+        
+        this.ministries = page.results;
+        this.loader = false;
+        
+      },
       error: console.log
     });
 

@@ -23,7 +23,11 @@
                 <button routerLink="./add" type="button" class="btn btn-primary">Agregar Ministerio</button>
             </div>
         </div>
-        <div class="row ml-2">
+        <div class="row m-3">
+            <div *ngIf="loader" class="loader col-sm-12 d-flex flex-column justify-content-center align-items-center p-2">
+                <img src="assets/dist/img/loader2.png" alt="loader-image" width="120"><br />
+                <span class="mt-2 d-block">Cargando elementos</span>
+            </div>
             <div class="ministry-card col-sm-4 mt-2 mb-2" *ngFor="let ministry of ministries">
                 <div class="position-relative p-3 bg-gray" style="height: 180px">
                     <div class="ribbon-wrapper">
