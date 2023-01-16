@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard-container',
@@ -12,6 +13,7 @@ export class DashboardContainerComponent implements OnInit {
 
 
   name: any = "";
+  mainGroupName: string = environment.app_config.main_group_name;
 
   constructor(
     private router: Router,

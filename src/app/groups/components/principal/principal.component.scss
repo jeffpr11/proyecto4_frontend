@@ -1,0 +1,17 @@
+
+.group-card {
+
+    transition: transform 0.5s;
+}
+
+.group-card:hover {
+
+    transform: scale(1.05);
+
+}
+
+.group-card-edit:hover {
+
+    transform: scale(1.05);
+
+}

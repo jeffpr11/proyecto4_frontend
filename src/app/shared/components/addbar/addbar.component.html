@@ -1,0 +1,20 @@
+
+<div class="row mb-2 d-flex justify-content-end">
+    
+    <div class="input-group col-3">
+        <input 
+            type="text" 
+            class="form-control border-secondary" 
+            [formControl]="filterBox"
+            [placeholder]="filterField"
+            (keyup)="emmitFilter($event)">
+        <div class="input-group-prepend">
+            <button type="button" class="btn btn-outline-secondary rounded-right">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-2">
+        <button [routerLink]="addUrl" type="button" class="btn btn-primary">{{buttonLegend}}</button>
+    </div>
+</div>

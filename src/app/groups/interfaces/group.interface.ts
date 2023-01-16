@@ -2,7 +2,7 @@
 import { GeneralFields } from "src/app/core/interfaces/general.fields.interface";
 import { Profile } from "src/app/core/interfaces/profile.interface";
 
-export interface Ministry extends GeneralFields {
+export interface Group extends GeneralFields {
     id?: number,
     name: string,
     level: number,

@@ -2,21 +2,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MinisteriosRoutingModule } from './ministerios-routing.module';
+import { GroupsRoutingModule } from './groups-routing.module';
 import { PrincipalComponent } from './components/principal/principal.component';
-import { AddMinistryComponent } from './components/addministry/addministry.component';
+import { AddGroupComponent } from './components/addgroup/addgroup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
     PrincipalComponent,
-    AddMinistryComponent,
+    AddGroupComponent,
+    EditComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MinisteriosRoutingModule
+    SharedModule,
+    GroupsRoutingModule,
   ]
 })
-export class MinisteriosModule { }
+export class GroupsModule { }

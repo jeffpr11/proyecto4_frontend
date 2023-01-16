@@ -1,19 +1,8 @@
 
 .loader > img {
 
-    opacity: .7;
     animation: rotation 1.6s infinite linear;
-
-}
-
-.ministry-card {
-
-    transition: transform 0.5s;
-}
-
-.ministry-card:hover {
-
-    transform: scale(1.05);
+    opacity: .7;
 
 }
 

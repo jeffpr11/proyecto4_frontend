@@ -1,0 +1,212 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Estadisticas Generales</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <div class="row">
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Miembros activos</span>
+                        <span class="info-box-number">4</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-sitemap"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Grupos</span>
+                        <span class="info-box-number">6</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <!-- fix for small devices only -->
+            <div class="clearfix hidden-md-up"></div>
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i
+                            class="nav-icon fas fa-calendar-check"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Eventos</span>
+                        <span class="info-box-number">7</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-share-alt-square"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Archivos compartidos</span>
+                        <span class="info-box-number">
+                            10
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <!-- /.col -->
+
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Eventos diarios</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <canvas baseChart [data]="datos" [type]="'line'">
+                        </canvas>
+                    </div>
+
+                </div>
+
+
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Donut Chart</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chartjs-size-monitor">
+                            <div class="chartjs-size-monitor-expand">
+                                <div class=""></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+                                <div class=""></div>
+                            </div>
+                        </div>
+                        <canvas id="donutChart"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;"
+                            class="chartjs-render-monitor" width="487" height="250"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Miembros por Grupo</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-baseline justify-content-end">
+                                <span class="mr-2" style="display: inline-block;">Grupos: </span>
+                                <select class="col-6 custom-select form-control-border" id="exampleSelectBorder" (change)="changeList($event)">
+                                    <option>Enciende</option>
+                                    <option>Pirofobia</option>
+                                    <option>Tierra Prometida</option>
+                                    <option>Crecimiento y cambio</option>
+                                    <option>Mosaico</option>
+                                    <option>Comunidad de varones</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card-body d-flex align-items-baseline justify-content-center">
+                                <canvas baseChart [data]="circleData" [type]="'pie'" [legend]="true" [options]="pieChartOptions">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Bar Chart</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div>
+                            <canvas id="barChart"
+                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;"
+                                class="chartjs-render-monitor" width="487" height="250"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div><!--/. container-fluid -->
+</section>

@@ -1,0 +1,67 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2 text-center">
+            <div class="col-sm-12">
+                <h1 class="m-0 font-weight-bold">Editar / {{groupName}}</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row m-2 d-flex justify-content-between">
+                <a [routerLink]="['/', appConfig.mainGroupName.toLowerCase(), groupParent != null ? groupParent : '']" class="btn btn-block btn-default col-2 pt-2">
+                <i class="fas fa-arrow-left"></i><span class="ml-2">Regresar</span>
+            </a>
+        </div>
+        <!-- Begin Form -->
+        <div class="card m-2">
+            <div class="card-header">
+                <h3 class="card-title fw-bold">Nuevo {{groupName?.toLowerCase()}}</h3>
+            </div>
+            <div class="card-body">
+                <form *ngIf="editFormGroup" [formGroup]="editFormGroup">
+                    <div class="row d-flex justify-content-between">
+                        <div class="form-group align-items-center col-6">
+                            <label for="" class="align-self-baseline pr-2">Nombre</label>
+                            <input type="text" formControlName="name"
+                                [ngClass]="{'is-invalid': editFormGroup.controls['name'].invalid && (editFormGroup.controls['name'].dirty || editFormGroup.controls['name'].touched)}"
+                                class="form-control form-control-sm align-self-baseline is-invalid"
+                                placeholder="Ingrese el nombre del ministerio">
+                            <span 
+                                *ngIf="editFormGroup.controls['name'].invalid && (editFormGroup.controls['name'].dirty || editFormGroup.controls['name'].touched)"
+                                class="error invalid-feedback">El nombre del grupo debe tener al menos 4 caracteres y maximo 100</span>
+                        </div>
+                        <div class="form-group col-6 justify-content-end text-right align-self-baseline" id="add-employees">
+                            <label class="align-self-baseline pr-2 ">Asignar encargado</label>
+                            <select 
+                                class="form-select form-select-sm align-self-baseline is-invalid"
+                                [ngClass]="{'is-invalid': editFormGroup.controls['group_leader'].invalid && (editFormGroup.controls['group_leader'].dirty || editFormGroup.controls['group_leader'].touched)}"
+                                formControlName="group_leader">
+                                <option selected>Seleccione al lider de {{groupName.toLowerCase()}}</option>
+                                <option *ngFor="let profile of leaderProfiles" [value]="profile.id">
+                                    {{profile.card_id}} - {{profile.user_details.first_name}} {{profile.user_details.last_name}} 
+                                </option>
+                            </select>
+                            <span 
+                                *ngIf="editFormGroup.controls['group_leader'].invalid && (editFormGroup.controls['group_leader'].dirty || editFormGroup.controls['group_leader'].touched)"
+                                class="error invalid-feedback">Debe seleccionar un lider de grupo</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripcion</label>
+                        <textarea class="form-control" rows="3" formControlName="description"
+                            [ngClass]="{'is-invalid': editFormGroup.controls['description'].invalid && (editFormGroup.controls['description'].dirty || editFormGroup.controls['description'].touched)}"
+                            placeholder="Ingrese una descripción para el ministerio"></textarea>
+                        <span *ngIf="editFormGroup.controls['description'].invalid && (editFormGroup.controls['description'].dirty || editFormGroup.controls['description'].touched)"
+                            class="error invalid-feedback">La descripción del grupo debe tener minimo 10 caracteres y maximo 100</span>
+                    </div>
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" (click)="editGroup()" class="btn btn-primary round col-4" [disabled]="!editFormGroup.valid">Actualizar {{groupName}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- End Form -->
+    </div>
+</section>

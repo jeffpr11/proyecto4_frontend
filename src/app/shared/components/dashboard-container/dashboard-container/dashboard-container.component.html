@@ -186,15 +186,15 @@
                  with font-awesome or any other icon font library -->
             <!-- <li class="nav-item menu-open" hasRole [role]="'superuser'"> -->
             <li class="nav-item" hasRole [role]="'superuser'">
-              <a routerLink="/ministerio" routerLinkActive="active" class="nav-link">
+              <a [routerLink]="['/', mainGroupName.toLowerCase()]" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon fas fa-landmark"></i>
                 <p>
-                  Ministerios
+                  {{mainGroupName}}
                 </p>
               </a>
             </li>
             <li class="nav-item" hasRole [role]="'superuser'">
-              <a href="pages/widgets.html" class="nav-link">
+              <a routerLink="/eventos/asistencia" class="nav-link">
                 <i class="nav-icon fas fa-user-check"></i>
                 <p>
                   Concurrencia a eventos
@@ -203,7 +203,7 @@
               </a>
             </li>
             <li class="nav-item" hasRole [role]="'superuser'">
-              <a href="#" class="nav-link">
+              <a routerLink="/estadisticas" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
                   Estadísticas Generales
@@ -227,7 +227,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
+              <a routerLink="/recursos" routerLinkActive="active" class="nav-link">
                 <i class="nav-icon far fa-file-alt"></i>
                 <p>
                   Recursos

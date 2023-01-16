@@ -23,8 +23,8 @@ export class ProfileService {
       params = {role}; }
     
     return this.http.get<Paginator<Profile>>(
-      this.PROFILE_URL,
-      params
+      `${this.PROFILE_URL}/`,
+      {params}
     );
 
   }
