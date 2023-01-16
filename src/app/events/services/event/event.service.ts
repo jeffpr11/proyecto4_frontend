@@ -2,20 +2,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Paginator } from 'src/app/core/interfaces/paginator.interface';
 import { environment } from 'src/environments/environment';
-import { Paginator } from '../../interfaces/paginator.interface';
-import { Profile } from '../../interfaces/profile.interface';
+import { GroupEvent } from '../../interfaces/event.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  PROFILE_URL: string = environment.api_main_url.concat(environment.resources.profile);
+  EVENT_URL: string = environment.api_main_url.concat(environment.resources.event);
   
   constructor(private http: HttpClient) { }
 
-  public getProfiles(role?: number): Observable<Paginator<Profile>> {
+  public getEvents(role?: number): Observable<Paginator<GroupEvent>> {
 
     let params = {};
     
@@ -23,7 +23,7 @@ export class ProfileService {
       params = {role}; }
     
     return this.http.get<Paginator<Profile>>(
-      `${this.PROFILE_URL}/`,
+      `${this.EVENT_URL}/`,
       {params}
     );
 
@@ -33,8 +33,16 @@ export class ProfileService {
 
     let params = {username};
 
-    return this.http.get<Profile>(`${this.PROFILE_URL}/`, {params});
+    return this.http.get<Profile>(`${this.EVENT_URL}/`, {params});
 
   }
 
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EventService {
+
+  constructor() { }
 }

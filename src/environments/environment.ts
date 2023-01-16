@@ -7,7 +7,8 @@ export const environment = {
   api_main_url: 'http://localhost:8000/api',
   resources: {
     main_group: '/organizations/group',
-    profile: '/user/profile'
+    profile: '/user/profile',
+    event: '/events/event'
   },
   app_config: {
     main_group_name: 'Ministerio',

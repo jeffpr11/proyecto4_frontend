@@ -55,10 +55,10 @@ export class AddGroupComponent implements OnInit {
     
     this.principalGroupForm = this.formBuilder.group({
       name: ['', [
-        Validators.required, Validators.minLength(4), Validators.maxLength(100)
+        Validators.required, Validators.minLength(4), Validators.maxLength(50)
       ]],
       description: ['', [
-        Validators.required, Validators.minLength(10), Validators.maxLength(100)
+        Validators.required, Validators.minLength(10), Validators.maxLength(1000)
       ]],
       group_leader: ['Seleccione al lider de ' + this.groupName?.toLowerCase(), [
         Validators.required, 
