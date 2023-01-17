@@ -24,11 +24,11 @@ export class GroupService {
 
     if(nombre) {
       params['search'] = nombre; }
-    
+
     return this.httpClient.get<Paginator<Group>>(`${this.MAIN_GROUP_URL}/`, { params });
 
   }
-  
+
   public getGroupsByPrincipalId(principalGroupId: number = 0, nombre: string = ''): Observable<Paginator<Group>> {
 
     let params: any = {
@@ -39,7 +39,7 @@ export class GroupService {
     return this.httpClient.get<Paginator<Group>>(`${this.MAIN_GROUP_URL}/`, { params });
 
   }
-  
+
 
 
   public getGroupById(id: number): Observable<Group> {
@@ -59,7 +59,7 @@ export class GroupService {
   public updateGroup(group: Group): Observable<Group> {
 
     Utils.updateGeneralFields(group);
-    
+
     return this.httpClient.put<Group>(`${this.MAIN_GROUP_URL}/${group.id}/`, group);
 
   }

@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   api_main_url: 'http://localhost:8000/api',
   resources: {
+    main_resource: '/organizations/resource',
     main_group: '/organizations/group',
     profile: '/user/profile',
     event: '/events/event'
@@ -24,4 +25,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
-  

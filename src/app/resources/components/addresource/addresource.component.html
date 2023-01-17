@@ -1,0 +1,83 @@
+<div class="content-header">
+  <div class="container-fluid">
+      <div class="row mb-2 text-center">
+          <div class="col-sm-12">
+              <h1 class="m-0 font-weight-bold">Agregar recurso</h1>
+          </div><!-- /.col -->
+      </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+  <div class="container-fluid">
+      <div class="row m-2 d-flex justify-content-between">
+          <a routerLink=".." class="btn btn-block btn-default col-2 pt-2">
+              <i class="fas fa-arrow-left"></i><span class="ml-2">Regresar</span>
+          </a>
+      </div>
+      <!-- Begin Form -->
+      <div class="card m-2">
+          <div class="card-header">
+              <h3 class="card-title fw-bold">Nuevo recurso</h3>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="principalResourceForm" (ngSubmit)="addResource()">
+                  <div class="row d-flex justify-content-between">
+                      <div class="form-group col-6 justify-content-end align-self-baseline" id="add-employees">
+                        <label for="" class="align-self-baseline pr-2">Nombre</label>
+                        <input type="text" formControlName="name"
+                            [ngClass]="{'is-invalid': principalResourceForm.controls['name'].invalid && (principalResourceForm.controls['name'].dirty || principalResourceForm.controls['name'].touched)}"
+                            class="form-control form-control-sm align-self-baseline is-invalid"
+                            placeholder="Ingrese el nombre del ministerio">
+                        <span
+                            *ngIf="principalResourceForm.controls['name'].invalid && (principalResourceForm.controls['name'].dirty || principalResourceForm.controls['name'].touched)"
+                            class="error invalid-feedback">El nombre del recurso debe tener al menos 4 caracteres y maximo 100</span>
+                      </div>
+                      <div class="form-group align-items-center col-6">
+                        <label for="" class="align-self-baseline pr-2">Archivo recurso</label>
+                        <input type="file" class="form-control form-control-sm align-self-baseline" name="route" (change)="onRecursoFile($event)" />
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group align-items-center col-6">
+                      <label class="align-self-baseline pr-2 ">Grupo</label>
+                      <select
+                          (change)="onChangeGroups()"
+                          class="form-select form-select-sm align-self-baseline is-invalid"
+                          [ngClass]="{'is-invalid': principalResourceForm.controls['groups'].invalid && (principalResourceForm.controls['groups'].dirty || principalResourceForm.controls['groups'].touched)}"
+                          formControlName="groups">
+                          <option selected>Seleccione un grupo</option>
+                          <option *ngFor="let group of groupsList" [value]="group.id">
+                              {{ group.name }}
+                          </option>
+                      </select>
+                      <span
+                          *ngIf="principalResourceForm.controls['groups'].invalid && (principalResourceForm.controls['groups'].dirty || principalResourceForm.controls['groups'].touched)"
+                          class="error invalid-feedback">Debe seleccionar un grupo</span>
+                    </div>
+
+                    <div class="form-group align-items-center col-6" *ngIf="principalResourceForm.controls['groups'].valid">
+                      <label class="align-self-baseline pr-2">SubGrupo</label>
+                      <select
+                          class="form-select form-select-sm align-self-baseline is-invalid"
+                          [ngClass]="{'is-invalid': principalResourceForm.controls['subgroups'].invalid && (principalResourceForm.controls['subgroups'].dirty || principalResourceForm.controls['subgroups'].touched)}"
+                          formControlName="subgroups">
+                          <option selected>Seleccione un subgrupo</option>
+                          <option *ngFor="let subgroup of subgroupsList" [value]="subgroup.id">
+                              {{ subgroup.name }}
+                          </option>
+                      </select>
+                     <!--  <span
+                          *ngIf="principalResourceForm.controls['groups'].invalid && (principalResourceForm.controls['groups'].dirty || principalResourceForm.controls['groups'].touched)"
+                          class="error invalid-feedback">Debe seleccionar un subgrupo</span> -->
+                  </div>
+                  </div>
+                  <div class="form-group d-flex justify-content-end">
+                      <button type="submit" class="btn btn-primary round col-4" [disabled]="!principalResourceForm.valid">Registrar recurso</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <!-- End Form -->
+  </div>
+</section>
