@@ -1,54 +1,61 @@
+
 <div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Recursos Compartidos</h1>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Recursos Compartidos</h1>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
 
 <!-- Main content -->
 <section class="content">
   <div class="container-fluid">
-      <app-addbar
-          addUrl="./add"
-          [filterField]="'Nombre del recurso'"
-          [buttonLegend]="'Agregar recurso'"
-          (filterEvent)="filterByField($event)">
-      </app-addbar>
-      <div class="row m-3">
-          <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
-          <app-emptypage
-              *ngIf="resources.length == 0"
-              class="col-sm-12"
-              [iconClass]="'fas fa-layer-group'"
-              [message]="'No existen recursos que mostrar'">
-          </app-emptypage>
 
-          <div class="card card-success col-lg-12 col-xl-12">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12 col-lg-6 col-xl-6" *ngFor="let resource of resources">
-                  <div class="attachment-block clearfix">
-                    <img class="attachment-img" height="100" width="100" src="{{ previewFileByExtension(resource.route) }}" alt="{{ resource.name }}">
-                    <div class="attachment-pushed">
-                    <h4 class="attachment-heading"><a href="{{ resource.route }}" target="_blank">{{ resource.name }}</a></h4>
-                      <hr>
-                      <div class="attachment-text">
-                        <span *ngIf="resource.groups_details.length > 0"><strong>Grupo:</strong> {{ resource.groups_details[0].name }}</span><br>
-                        <span *ngIf="resource.groups_details.length > 0"><strong>Líder de grupo:</strong> {{ resource.groups_details[0].leader_details.user_details.first_name }} {{ resource.groups_details[0].leader_details.user_details.last_name }}</span>
-                      </div>
-                    </div>
+    <app-addbar addUrl="./add" [filterField]="'Nombre del recurso'" [buttonLegend]="'Agregar recurso'"
+      (filterEvent)="filterByField($event)">
+    </app-addbar>
+    <div class="row m-3">
+      <div class="col-sm-12">
+      </div>
+      <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
+      <app-emptypage *ngIf="resources.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
+        [message]="'No existen recursos que mostrar'">
+      </app-emptypage>
+      <div class="card card-success col-sm-12">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12 col-lg-6 col-xl-6" *ngFor="let resource of resources">
+              <div class="attachment-block clearfix">
+                <a href="{{ resource.route }}" target="_blank"><img class="attachment-img"
+                    src="{{ previewFileByExtension(resource.route) }}" alt="{{ resource.name }}"></a>
+                <div class="attachment-pushed">
+                  <h4 class="attachment-heading mb-2 border-bottom align-self-baseline text-dark">
+                    {{ resource.name }}
+                  </h4>
+                  <div class="attachment-text align-items-baseline">
+                    <span *ngIf="resource.groups_details.length > 0"><strong>Grupo:</strong> {{
+                      resource.groups_details[0].name }}</span><br>
+                    <span *ngIf="resource.groups_details.length > 0"><strong>Líder de grupo:</strong> {{
+                      resource.groups_details[0].leader_details.user_details.first_name }} {{
+                      resource.groups_details[0].leader_details.user_details.last_name }}
+                      <a (click)="downloadFile(resource)"
+                        class="btn btn-default btn-sm position-absolute display-absolute" style="right: 20px;">
+                        <i class="fas fa-download"></i> Descargar</a>
+                    </span>
                   </div>
-                  <a [href]="resource.route" [download]="resource.name" class="btn btn-default btn-sm"><i class="fas fa-download"></i> Descargar</a>
+                  <!-- <button (click)="downloadFile(resource)" class="btn btn-default btn-sm display-absolute">
+                    <i class="fas fa-download"></i>Descargar</button> -->
                 </div>
               </div>
-
             </div>
           </div>
 
+        </div>
       </div>
+
+    </div>
   </div>
 </section>

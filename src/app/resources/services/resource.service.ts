@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -16,6 +17,7 @@ export class ResourceService {
   constructor(private httpClient: HttpClient) { }
 
   public getResources(name?: string): Observable<Paginator<Resource>> {
+    
     let params : any = {};
 
     if(name) {
@@ -23,9 +25,17 @@ export class ResourceService {
     }
 
     return this.httpClient.get<Paginator<Resource>>(`${this.MAIN_RESOURCE_URL}/`, { params });
+
+  }
+  
+  public getResourceByUrl(url: string) {
+    
+    return this.httpClient.get(url, { observe: 'response', responseType: 'blob' } );
+
   }
 
   public addResource(mainResource: Resource): Observable<Resource> {
+    
     Utils.setGeneralFields(mainResource);
 
     const formData = new FormData();
@@ -34,5 +44,7 @@ export class ResourceService {
     formData.append('groups', mainResource.groups[0].toString());
 
     return this.httpClient.post<Resource>(`${this.MAIN_RESOURCE_URL}/`, formData);
+
   }
+  
 }

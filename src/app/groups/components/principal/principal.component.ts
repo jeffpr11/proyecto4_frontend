@@ -5,7 +5,6 @@ import { Group } from '../../interfaces/group.interface';
 import { GroupService } from '../../services/group/group.service';
 
 import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';

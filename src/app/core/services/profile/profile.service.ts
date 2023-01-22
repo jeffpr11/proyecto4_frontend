@@ -29,9 +29,9 @@ export class ProfileService {
 
   }
 
-  public getProfilesByUsername(username: string): Observable<Profile> {
+  public getProfileByUsername(username: string): Observable<Profile> {
 
-    let params = {username};
+    let params = { user__username: username };
 
     return this.http.get<Profile>(`${this.PROFILE_URL}/`, {params});
 

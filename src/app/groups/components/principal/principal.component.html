@@ -10,48 +10,57 @@
 
 <section class="content">
     <div class="container-fluid">
-        <app-addbar 
-            addUrl="./add"
-            [filterField]="'Nombre ' + groupName.toLowerCase()"
-            [buttonLegend]="'Agregar ' + groupName.toLowerCase()"
-            (filterEvent)="filterByField($event)">
-        </app-addbar>
+        <div class="row m-3">
+            <div class="col-sm-12">
+                <app-addbar addUrl="./add" [filterField]="'Nombre ' + groupName.toLowerCase()"
+                [buttonLegend]="'Agregar ' + groupName.toLowerCase()" (filterEvent)="filterByField($event)">
+            </app-addbar>
+
+            </div>
+        </div>
         <div class="row m-3">
             <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
-            <app-emptypage 
-                *ngIf="groups.length == 0"
-                class="col-sm-12"
-                [iconClass]="'fas fa-layer-group'"
+            <app-emptypage *ngIf="groups.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
                 [message]="'No existen grupos que mostrar'">
             </app-emptypage>
-            <div class="group-card col-sm-4 mt-2 mb-2" 
-                *ngFor="let group of groups" 
-                [routerLink]="['/', mainGroupName, group.id]">
-                <div class="position-relative p-3 bg-gray" style="height: 180px">
+
+            <div class="col-sm-12 d-flex flex-wrap">
+                <div class="card mr-4 mb-4" style="width: 20rem;" *ngFor="let group of groups">
                     <div class="ribbon-wrapper">
-                        <div class="ribbon bg-primary" 
-                            *ngIf="
-                            (moment(group.date_created).diff(moment(), 'year') == 0)
-                            && (moment(group.date_created).diff(moment(), 'month') == 0)">
+                        <div class="ribbon bg-primary" *ngIf="
+                        (moment(group.date_created).diff(moment(), 'year') == 0)
+                        && (moment(group.date_created).diff(moment(), 'month') == 0)">
                             Nuevo
                         </div>
                     </div>
                     <div class="position-relative">
-                        <li class="fas fa-edit group-card-edit mr-2"
-                            [routerLink]="groupId === 0 ? ['/', mainGroupName, 'edit', group.id] : ['/', mainGroupName, 'group', 'edit', group.id]"></li>
-                        <strong>{{group.name}}</strong> <br>
+                        <img [src]="group.group_image" class="card-img-top" [alt]="group.group_image.split('/').at(-1)" height="180">
+                        <div class="button-pad position-absolute m-2 d-flex justify-content-end" style="bottom: 0px;">
+                            <li class="fas fa-edit group-card-edit mr-2"
+                                [routerLink]="groupId === 0 ? ['/', mainGroupName, 'edit', group.id] : ['/', mainGroupName, 'group', 'edit', group.id]">
+                            </li>
+                        </div>
                     </div>
-                    <small>
-                        {{group.description}}</small><br><br><br>
-                    <div class="d-flex justify-content-between">
-                        <small><strong>Encargado:</strong> 
-                            {{group.leader_details.user_details.first_name}} 
-                            {{group.leader_details.user_details.last_name}} 
-                        </small>
-                        <small><strong>Total miembros:</strong> {{group.members.length}}</small>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{group.name}}
+                        </h5>
+                        <div class="card-text">
+                            <small>
+                                {{group.description}}</small><br>
+                            <div class="d-flex justify-content-between mb-2 mt-4">
+                                <small><strong>Encargado:</strong>
+                                    {{group.leader_details.user_details.first_name}}
+                                    {{group.leader_details.user_details.last_name}}
+                                </small>
+                                <small><strong>Total miembros:</strong> {{group.members.length}}</small>
+                            </div>
+                        </div>
                     </div>
+                    <a [routerLink]="['/', mainGroupName, group.id]" class="btn btn-primary m-2 mb-3">Ver subgrupos</a>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

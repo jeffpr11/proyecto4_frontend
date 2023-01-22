@@ -28,6 +28,18 @@ export class GroupService {
     return this.httpClient.get<Paginator<Group>>(`${this.MAIN_GROUP_URL}/`, { params });
 
   }
+  
+  public  getGroupsByOwner(owner: string, principal_id: number = 1, level: number = 1): Observable<Paginator<Group>> {
+
+    return this.httpClient.get<Paginator<Group>>(`${this.MAIN_GROUP_URL}/`, { 
+      params: { 
+        level, 
+        principal_id,
+        group_leader__user__username: owner, 
+      }
+    });
+
+  }
 
   public getGroupsByPrincipalId(principalGroupId: number = 0, nombre: string = ''): Observable<Paginator<Group>> {
 
@@ -48,11 +60,21 @@ export class GroupService {
 
   }
 
-  public addGroup(mainGroup: Group): Observable<Group> {
+  public addGroup(group: Group): Observable<Group> {
 
-    Utils.setGeneralFields(mainGroup);
+    Utils.setGeneralFields(group);
 
-    return this.httpClient.post<Group>(`${this.MAIN_GROUP_URL}/`, mainGroup);
+    let formData = new FormData();
+    
+    formData.append("name", group.name);
+    formData.append("level", group.level.toString());
+    formData.append("description", group.description);
+    formData.append("group_image", group.group_image);
+    formData.append("group_leader", group.group_leader.toString());
+    if( group.principal_group != null) { 
+      formData.append("principal_group", group.principal_group.toString()); }
+
+    return this.httpClient.post<Group>(`${this.MAIN_GROUP_URL}/`, formData);
 
   }
 
@@ -60,7 +82,17 @@ export class GroupService {
 
     Utils.updateGeneralFields(group);
 
-    return this.httpClient.put<Group>(`${this.MAIN_GROUP_URL}/${group.id}/`, group);
+    let formData = new FormData();
+    
+    formData.append("name", group.name);
+    formData.append("description", group.description);
+    formData.append("level", group.level.toString());
+    formData.append("group_image", group.group_image);
+    formData.append("group_leader", group.group_leader.toString());
+    if( group.principal_group != null) { 
+      formData.append("principal_group", group.principal_group.toString()); }
+
+    return this.httpClient.put<Group>(`${this.MAIN_GROUP_URL}/${group.id}/`, formData);
 
   }
 

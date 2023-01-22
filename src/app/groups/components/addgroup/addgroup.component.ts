@@ -51,6 +51,17 @@ export class AddGroupComponent implements OnInit {
     
   }
 
+  public loadGroupImage(event: any) {
+    
+    if (event.target.files.length > 0) {
+      
+      const file = event.target.files[0];
+      this.principalGroupForm.get('group_image').setValue(file);
+
+    }
+
+  }
+
   public buildForm() {
     
     this.principalGroupForm = this.formBuilder.group({
@@ -60,7 +71,10 @@ export class AddGroupComponent implements OnInit {
       description: ['', [
         Validators.required, Validators.minLength(10), Validators.maxLength(1000)
       ]],
-      group_leader: ['Seleccione al lider de ' + this.groupName?.toLowerCase(), [
+      group_image: ['', [
+        Validators.required
+      ]],
+      user_profile: ['Seleccione al lider de ' + this.groupName?.toLowerCase(), [
         Validators.required, 
         Validators.min(1), 
         Validators.pattern('^[1-9]+$')]

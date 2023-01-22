@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -40,7 +41,7 @@ export class AddresourceComponent implements OnInit {
       }
     });
   }
-
+  
   public addResource () {
     if( this.principalResourceForm.valid ) {
       let newResource: Resource = this.principalResourceForm.value;
@@ -58,7 +59,7 @@ export class AddresourceComponent implements OnInit {
       })
     }
   }
-
+  
   public onRecursoFile (event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
@@ -68,7 +69,7 @@ export class AddresourceComponent implements OnInit {
 
   public onChangeGroups () {
     let groupId = this.principalResourceForm.get('groups').value;
-    this.groupService.getGroupsByPrincipalId(groupId).subscribe({
+    this.groupService.getGroupsByOwner(localStorage.getItem('username'), groupId).subscribe({
       next: (response: any) => {
         this.subgroupsList = response.results
       }

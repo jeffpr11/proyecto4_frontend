@@ -28,14 +28,24 @@
                         <input type="text" formControlName="name"
                             [ngClass]="{'is-invalid': principalResourceForm.controls['name'].invalid && (principalResourceForm.controls['name'].dirty || principalResourceForm.controls['name'].touched)}"
                             class="form-control form-control-sm align-self-baseline is-invalid"
-                            placeholder="Ingrese el nombre del ministerio">
+                            placeholder="Ingrese el nombre del recurso">
                         <span
                             *ngIf="principalResourceForm.controls['name'].invalid && (principalResourceForm.controls['name'].dirty || principalResourceForm.controls['name'].touched)"
                             class="error invalid-feedback">El nombre del recurso debe tener al menos 4 caracteres y maximo 100</span>
                       </div>
                       <div class="form-group align-items-center col-6">
                         <label for="" class="align-self-baseline pr-2">Archivo recurso</label>
-                        <input type="file" class="form-control form-control-sm align-self-baseline" name="route" (change)="onRecursoFile($event)" />
+                        <input [ngClass]="{
+                            'is-invalid': principalResourceForm.controls['route'].invalid 
+                            && (principalResourceForm.controls['route'].dirty 
+                            || principalResourceForm.controls['route'].touched)}"
+                            type="file" class="form-control form-control-sm align-self-baseline" 
+                            name="route" (change)="onRecursoFile($event)" formControlName="route"/>
+                            <span
+                          *ngIf="principalResourceForm.controls['route'].invalid 
+                          && (principalResourceForm.controls['route'].dirty 
+                          || principalResourceForm.controls['route'].touched)"
+                          class="error invalid-feedback">Debe seleccionar un archivo valido</span>
                       </div>
                   </div>
                   <div class="row">
@@ -43,7 +53,7 @@
                       <label class="align-self-baseline pr-2 ">Grupo</label>
                       <select
                           (change)="onChangeGroups()"
-                          class="form-select form-select-sm align-self-baseline is-invalid"
+                          class="form-control form-control-sm align-self-baseline is-invalid"
                           [ngClass]="{'is-invalid': principalResourceForm.controls['groups'].invalid && (principalResourceForm.controls['groups'].dirty || principalResourceForm.controls['groups'].touched)}"
                           formControlName="groups">
                           <option selected>Seleccione un grupo</option>
@@ -52,14 +62,16 @@
                           </option>
                       </select>
                       <span
-                          *ngIf="principalResourceForm.controls['groups'].invalid && (principalResourceForm.controls['groups'].dirty || principalResourceForm.controls['groups'].touched)"
+                          *ngIf="principalResourceForm.controls['groups'].invalid 
+                          && (principalResourceForm.controls['groups'].dirty 
+                          || principalResourceForm.controls['groups'].touched)"
                           class="error invalid-feedback">Debe seleccionar un grupo</span>
                     </div>
 
                     <div class="form-group align-items-center col-6" *ngIf="principalResourceForm.controls['groups'].valid">
                       <label class="align-self-baseline pr-2">SubGrupo</label>
                       <select
-                          class="form-select form-select-sm align-self-baseline is-invalid"
+                          class="form-control form-control-sm align-self-baseline is-invalid"
                           [ngClass]="{'is-invalid': principalResourceForm.controls['subgroups'].invalid && (principalResourceForm.controls['subgroups'].dirty || principalResourceForm.controls['subgroups'].touched)}"
                           formControlName="subgroups">
                           <option selected>Seleccione un subgrupo</option>

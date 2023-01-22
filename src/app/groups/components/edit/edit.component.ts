@@ -33,11 +33,11 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activateRouteService.params.subscribe( (params: any) => {
-      
+    this.activateRouteService.params.subscribe((params: any) => {
+
       this.groupService.getGroupById(parseInt(params.id)).subscribe({
         next: (group: Group) => {
-          
+
           this.group = group;
           this.groupParent = group.principal_group;
           this.groupName = (group.level === 0) ? this.appConfig.mainGroupName : this.appConfig.subGroupName;
@@ -53,29 +53,41 @@ export class EditComponent implements OnInit {
         error: console.log
       });
 
-      
+
 
     });
 
   }
 
-  public buildForm() {
+  public loadGroupImage(event: any) {
     
+    if (event.target.files.length > 0) {
+      
+      const file = event.target.files[0];
+      this.editFormGroup.get('group_image').setValue(file);
+
+    }
+
+  }
+
+  public buildForm() {
+
     this.editFormGroup = this.formBuilder.group({
       name: [this.group.name, [
-        Validators.required, Validators.minLength(4), Validators.maxLength(100)
+        Validators.required, Validators.minLength(4), Validators.maxLength(50)
       ]],
       description: [this.group.description, [
         Validators.required, Validators.minLength(10), Validators.maxLength(100)
       ]],
+      group_image: [''],
       group_leader: [
         this.group.leader_details != null ?
-        this.group.leader_details.id : 
-        'Seleccione al lider de ' + this.groupName?.toLowerCase()
+          this.group.leader_details.id :
+          'Seleccione al lider de ' + this.groupName?.toLowerCase()
         , [
-        Validators.required, 
-        Validators.min(1), 
-        Validators.pattern('^[1-9]+$')]
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern('^[1-9]+$')]
       ]
     });
 
@@ -83,19 +95,20 @@ export class EditComponent implements OnInit {
 
   public editGroup() {
 
-    if( this.editFormGroup.valid ) {
+    if (this.editFormGroup.valid) {
       this.group.name = this.editFormGroup.get('name').value;
       this.group.description = this.editFormGroup.get('description').value;
       this.group.group_leader = this.editFormGroup.get('group_leader').value;
-      
+      this.group.group_image = this.editFormGroup.get('group_image').value;
+
       this.groupService.updateGroup(this.group).subscribe({
-        next: () => {},
+        next: () => { },
         complete: () => this.toastrService.success("El grupo se actulizo correctamente"),
-        error: (err) => Utils.getFormErrors(err.error).forEach( (e: string) => this.toastrService.error(e))
+        error: (err) => Utils.getFormErrors(err.error).forEach((e: string) => this.toastrService.error(e))
       })
 
     }
 
   }
-
+  
 }

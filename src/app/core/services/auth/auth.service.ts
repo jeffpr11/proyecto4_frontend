@@ -50,6 +50,7 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("roles");
     localStorage.removeItem("username");
+    localStorage.removeItem("profile_id");
 
   }
 
@@ -66,6 +67,7 @@ export class AuthService {
     localStorage.setItem("exp", payload.exp);
     localStorage.setItem("name", payload.name);
     localStorage.setItem("username", payload.username);
+    localStorage.setItem("profile_id", payload.profile_id);
     localStorage.setItem("roles", payload.roles ? payload.roles : []);
 
   }

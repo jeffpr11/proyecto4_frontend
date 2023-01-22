@@ -33,10 +33,10 @@
                                 *ngIf="principalGroupForm.controls['name'].invalid && (principalGroupForm.controls['name'].dirty || principalGroupForm.controls['name'].touched)"
                                 class="error invalid-feedback">El nombre del grupo debe tener al menos 4 caracteres y maximo 100</span>
                         </div>
-                        <div class="form-group col-6 justify-content-end text-right align-self-baseline" id="add-employees">
+                        <div class="form-group col-6 align-self-baseline" id="add-employees">
                             <label class="align-self-baseline pr-2 ">Asignar encargado</label>
                             <select 
-                                class="form-select form-select-sm align-self-baseline is-invalid"
+                                class="form-control form-control-sm align-self-baseline is-invalid"
                                 [ngClass]="{'is-invalid': principalGroupForm.controls['group_leader'].invalid && (principalGroupForm.controls['group_leader'].dirty || principalGroupForm.controls['group_leader'].touched)}"
                                 formControlName="group_leader">
                                 <option selected>Seleccione al lider de {{groupName.toLowerCase()}}</option>
@@ -48,10 +48,24 @@
                                 *ngIf="principalGroupForm.controls['group_leader'].invalid && (principalGroupForm.controls['group_leader'].dirty || principalGroupForm.controls['group_leader'].touched)"
                                 class="error invalid-feedback">Debe seleccionar un lider de grupo</span>
                         </div>
+                        <div class="form-group col-12 align-self-baseline" id="add-employees">
+                            <label for="formFileSm" class="form-label align-self-baseline pr-2 ">Imagen de grupo</label>
+                            <input class="form-control form-control-sm align-self-baseline" type="file" 
+                                (change)="loadGroupImage($event)"
+                                [ngClass]="{'is-invalid': 
+                                    principalGroupForm.controls['group_image'].invalid 
+                                    && (principalGroupForm.controls['group_image'].dirty 
+                                    || principalGroupForm.controls['group_image'].touched)
+                                }" formControlName="group_image">
+                            <span *ngIf="principalGroupForm.controls['group_image'].invalid 
+                                    && (principalGroupForm.controls['group_image'].dirty 
+                                    || principalGroupForm.controls['group_image'].touched)"
+                                class="error invalid-feedback">Debe seleccionar una imagen para el grupo</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Descripcion</label>
-                        <textarea class="form-control" rows="3" formControlName="description"
+                        <textarea class="form-control form-control-sm" rows="3" formControlName="description"
                             [ngClass]="{'is-invalid': principalGroupForm.controls['description'].invalid && (principalGroupForm.controls['description'].dirty || principalGroupForm.controls['description'].touched)}"
                             placeholder="Ingrese una descripción para el ministerio"></textarea>
                         <span *ngIf="principalGroupForm.controls['description'].invalid && (principalGroupForm.controls['description'].dirty || principalGroupForm.controls['description'].touched)"

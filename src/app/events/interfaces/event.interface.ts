@@ -9,11 +9,20 @@ export enum GroupEventType {
 
 export interface GroupEvent extends GeneralFields {
  
-    "name": string,
-    "description": string,
-    "type": GroupEventType,
-    "date_start": string,
-    "date_end": string,
-    "capacity": number
+    name: string,
+    date_end: string,
+    capacity: number,
+    date_start: string,
+    description: string,
+    event_image: string,
+    type: GroupEventType,
+    user_profile: number,
+    user_profile_details: {
+        first_name: string,
+        last_name: string
+    }
+    group_details: {
+        name: string
+    }
     
 }

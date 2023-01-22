@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Paginator } from 'src/app/core/interfaces/paginator.interface';
 import { Resource } from '../../interfaces/resource.interface';
@@ -51,24 +52,35 @@ export class PrincipalComponent implements OnInit {
   }
 
   public previewFileByExtension (route: string) {
-    let allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
+    
+    let allowedExtensions = /(.jpg|.jpeg|.png|.gif|.webp)$/i;
 
     let srcRoute = route;
 
     if(!allowedExtensions.exec(route)) {
-      srcRoute = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png";
+      srcRoute = "/assets/dist/img/pdf-icon.svg";
     }
 
     return srcRoute;
+
   }
 
-  public downloadFile (route: string) {
-    const link = document.createElement('a');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('href', route);
-    link.setAttribute('download', `ella.pdf`);
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+  public downloadFile (resource: Resource) {
+
+    this.resourceService.getResourceByUrl(resource.route).subscribe({
+      next: (response) => {
+
+        let blob = response.body as Blob,
+          resourceTmpTag = document.createElement("a");
+          
+        resourceTmpTag.download = resource.name.replace(" ", "_").toLowerCase();
+        resourceTmpTag.href = window.URL.createObjectURL(blob);
+        resourceTmpTag.click();
+
+      }
+
+    });
+  
   }
+
 }

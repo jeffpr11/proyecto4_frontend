@@ -8,6 +8,7 @@ export interface Group extends GeneralFields {
     level: number,
     members: Profile[],
     description: string,
+    group_image?: string,
     group_leader: number,
     principal_group: number,
     leader_details?: Profile,

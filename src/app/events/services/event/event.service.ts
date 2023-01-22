@@ -9,40 +9,21 @@ import { GroupEvent } from '../../interfaces/event.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
-
+export class EventService {
+  
   EVENT_URL: string = environment.api_main_url.concat(environment.resources.event);
   
   constructor(private http: HttpClient) { }
 
-  public getEvents(role?: number): Observable<Paginator<GroupEvent>> {
+  public getEvents(): Observable<Paginator<GroupEvent>> {
 
     let params = {};
     
-    if(role) {
-      params = {role}; }
-    
-    return this.http.get<Paginator<Profile>>(
+    return this.http.get<Paginator<GroupEvent>>(
       `${this.EVENT_URL}/`,
-      {params}
+      { params }
     );
 
   }
 
-  public getProfilesByUsername(username: string): Observable<Profile> {
-
-    let params = {username};
-
-    return this.http.get<Profile>(`${this.EVENT_URL}/`, {params});
-
-  }
-
-}
-
-@Injectable({
-  providedIn: 'root'
-})
-export class EventService {
-
-  constructor() { }
 }
