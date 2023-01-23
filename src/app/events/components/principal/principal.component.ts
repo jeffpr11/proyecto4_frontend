@@ -14,6 +14,7 @@ import { EventService } from '../../services/event/event.service';
 })
 export class PrincipalComponent implements OnInit {
 
+  loader: boolean;
   userProfile: Profile;
   events: GroupEvent[];
 
@@ -24,6 +25,7 @@ export class PrincipalComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.loader = true;
     zip(
       this.eventService.getEvents(),
       this.profileService.getProfileByUsername(localStorage.getItem("username")),
@@ -32,9 +34,18 @@ export class PrincipalComponent implements OnInit {
         
         this.events = data[0].results;
         this.userProfile = data[1].results[0];
+        this.loader = false;
 
       }
     });
+
+  }
+
+  public updateEvents(event: any) {
+
+    this.events.push(event);
+    this.events.reverse();
+    document.getElementById("event-changer").click();
 
   }
 

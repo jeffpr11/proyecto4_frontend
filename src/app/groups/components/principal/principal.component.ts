@@ -75,6 +75,7 @@ export class PrincipalComponent implements OnInit {
         },
         error: (err) => {
           this.toastrService.error("Error al cargar la información del grupo");
+          this.loader = false;
           this.routeService.navigate(['/', mainGroupName])
         }
       });

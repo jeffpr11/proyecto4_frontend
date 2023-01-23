@@ -1,4 +1,5 @@
 
+import { AbstractControl, FormControl } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { AppConfig } from "../core/interfaces/appconfig.interface";
 import { GeneralFields, LastAction } from "../core/interfaces/general.fields.interface";
@@ -49,6 +50,17 @@ export class Utils {
       return {
         mainGroupName,
         subGroupName
+      }
+
+    }
+
+    public static loadImageFromInput(event: any, formControl: AbstractControl) {
+
+      if (event.target.files.length > 0) {
+
+        const file = event.target.files[0];
+        formControl.setValue(file);
+  
       }
 
     }

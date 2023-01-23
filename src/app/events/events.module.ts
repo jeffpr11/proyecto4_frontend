@@ -6,6 +6,7 @@ import { PrincipalComponent } from './components/principal/principal.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddeventComponent } from './components/addevent/addevent.component';
 import { EventpostComponent } from './components/eventpost/eventpost.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { EventpostComponent } from './components/eventpost/eventpost.component';
   imports: [
     CommonModule,
     SharedModule,
-    EventsRoutingModule
+    EventsRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class EventsModule { }

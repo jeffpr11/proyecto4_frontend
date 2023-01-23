@@ -15,10 +15,15 @@ export interface Profile extends GeneralFields {
     work_tel: string,
     role: 0 | 1 | 2,
     genre: 'F' | 'M',
+    card_image: string,
+    profile_image: string,
+    total_events?: number,
+    total_groups?: number,
+    total_comments?: number,
     work_address: string,
     work_activity: string,
     civil_status: 'C' | 'S',
-    card_id_resource?: number
+    card_id_resource?: number,
     user_details: UserCredentials
 
 }

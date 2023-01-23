@@ -12,10 +12,10 @@ export enum LastAction {
 }
 
 export interface GeneralFields {
-    state: Estate,
-    date_created: string,
-    date_modified: string,
-    user_creator: string,
-    user_modifier: string,
-    last_action: LastAction,
+    state?: Estate,
+    date_created?: string,
+    date_modified?: string,
+    user_creator?: string,
+    user_modifier?: string,
+    last_action?: LastAction,
 }

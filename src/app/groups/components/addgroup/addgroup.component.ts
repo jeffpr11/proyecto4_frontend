@@ -90,7 +90,7 @@ export class AddGroupComponent implements OnInit {
       let newGroup: Group = this.principalGroupForm.value;
       
       newGroup.level = 0;
-      newGroup.principal_group = this.groupId == 0 ? null : this.groupId; 
+      newGroup.principal_group = this.groupId == 0 ? null : this.groupId;
       
       let groupRequest = this.groupId == 0 ? 
         this.groupService.addGroup(newGroup) :

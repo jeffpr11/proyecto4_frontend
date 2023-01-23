@@ -9,7 +9,8 @@ export const environment = {
     main_resource: '/organizations/resource',
     main_group: '/organizations/group',
     profile: '/user/profile',
-    event: '/events/event'
+    event: '/events/event',
+    comment: '/events/comment',
   },
   app_config: {
     main_group_name: 'Ministerio',

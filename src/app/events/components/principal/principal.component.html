@@ -13,26 +13,26 @@
     <div class="container-fluid">
         <div class="row m-2">
             <div class="col-md-3">
-
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="assets/dist/img/sample_user_avatar.png"
-                                alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle"
+                                [src]="userProfile?.profile_image" alt="User profile picture">
                         </div>
-                        <h3 class="profile-username text-center">{{userProfile?.user_details.first_name}} {{userProfile?.user_details.last_name}}</h3>
+                        <h3 class="profile-username text-center">{{userProfile?.user_details.first_name}}
+                            {{userProfile?.user_details.last_name}}</h3>
                         <p class="text-muted text-center">{{userProfile?.work}}</p>
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>Eventos publicados</b> <a class="float-right">1,322</a>
+                                <b>Eventos publicados</b> <a class="float-right">{{userProfile?.total_events}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Asistencia a eventos</b> <a class="float-right">13,287</a>
+                                <b>Comentarios realizados</b> <a class="float-right">{{userProfile?.total_comments}}</a>
                             </li>
-                            <li class="list-group-item d-block">
+                            <!-- <li class="list-group-item d-block">
                                 <span class="d-block"><b>Ministerio:</b></span>
                                 <a class=" d-block">Crecimiento y Cambio</a>
-                            </li>
+                            </li> -->
                         </ul>
                         <a href="#" class="btn btn-primary btn-block"><b>Actualizar Perfil</b></a>
                     </div>
@@ -45,22 +45,24 @@
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
-                            <li class="nav-item"><a class="nav-link active" href="#events"
-                                    data-toggle="tab">Eventos</a>
+                            <li class="nav-item"><a class="nav-link active" href="#events" id="event-changer" data-toggle="tab">Eventos</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#add-event" data-toggle="tab">Agregar evento</a>
+                            <li class="nav-item"><a class="nav-link" href="#add-event" data-toggle="tab">Agregar
+                                    evento</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            
+
                             <div class="active tab-pane" id="events">
-                                <events-eventposts [eventList]="events"></events-eventposts>
-                            </div>    
+                                <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
+                                <events-eventposts *ngIf="events?.length != null"
+                                    [eventList]="events"></events-eventposts>
+                            </div>
 
                             <div class="tab-pane" id="add-event">
-                                <events-addevent></events-addevent>
+                                <events-addevent (newGroupEvent)="updateEvents($event)"></events-addevent>
                             </div>
 
                         </div>
@@ -77,27 +79,16 @@
                     </div>
 
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Festejos navideños</strong>
-                        <br><span style="font-size: small;">Ministerio Enciende</span>
-                        <p class="text-muted">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        </p>
-                        <hr>
-                        
-                        <strong><i class="fas fa-book mr-1"></i> Festejos navideños</strong>
-                        <br><span style="font-size: small;">Ministerio Enciende</span>
-                        <p class="text-muted">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        </p>
-                        <hr>
-                        
-                        <strong><i class="fas fa-book mr-1"></i> Festejos navideños</strong>
-                        <br><span style="font-size: small;">Ministerio Enciende</span>
-                        <p class="text-muted">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        </p>
-                        <hr>
-                        
+                        <div *ngFor="let event of events | slice: 0:3">
+                            <strong>
+                                <i class="fas fa-calendar-day"></i> {{event.name}}</strong>
+                            <!-- <br><span style="font-size: small;">Ministerio Enciende</span> -->
+                            <p class="text-muted">
+                                {{event.description | slice: 0:100}}
+                            </p>
+                            <hr>
+                        </div>
+
                     </div>
 
                 </div>

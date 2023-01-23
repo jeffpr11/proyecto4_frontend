@@ -1,33 +1,72 @@
-
+<app-emptypage *ngIf="eventList.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
+    [message]="'No existen eventos que mostrar'">
+</app-emptypage>
 <div class="post" *ngFor="let event of eventList">
     <div class="user-block">
-        <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg"
-            alt="user image">
+        <img class="img-circle img-bordered-sm" [src]="event.user_profile_details?.profile_image" alt="user image">
         <span class="username">
-            <a href="#">{{event.name}}</a>
+            <a routerLink="./">{{event.name}}</a>
         </span>
-        <span class="description">Jonathan Burke - {{ moment(event.date_created).fromNow() }}</span>
+        <span class="description">{{event.user_profile_details?.user_details.first_name}}
+            {{event.user_profile_details?.user_details.last_name}} - {{ moment(event.date_created,
+            moment.HTML5_FMT.DATETIME_LOCAL).add(-5, 'hours').fromNow() }}</span>
     </div>
-    
+
     <p>
         {{event.description}}
     </p>
-    <p>
-        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i>{{event.group_details.name}}</a>
-        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i>
-            Like</a>
-        <span class="float-right">
-            <a href="#" class="link-black text-sm">
-                <i class="far fa-comments mr-1"></i> Comments (5)
-            </a>
+    <div>
+        <div href="#" class="link-black text-sm mr-2">
+            <i class="far fa-calendar mr-2"></i>
+            <strong>
+                <span *ngIf="moment(event.date_start, moment.HTML5_FMT.DATETIME_LOCAL).isSameOrAfter(moment())">Inicia:
+                </span>
+                <span *ngIf="!moment(event.date_start, moment.HTML5_FMT.DATETIME_LOCAL).isSameOrAfter(moment())">Inicio:
+                </span>
+            </strong> {{moment(event.date_start, moment.HTML5_FMT.DATETIME_LOCAL).fromNow()}}
+            <strong class="ml-2">
+                <span *ngIf="moment(event.date_end, moment.HTML5_FMT.DATETIME_LOCAL).isSameOrAfter(moment())">
+                    Finaliza:
+                </span>
+                <span *ngIf="!moment(event.date_end, moment.HTML5_FMT.DATETIME_LOCAL).isSameOrAfter(moment())">
+                    Finalizó:
+                </span>
+            </strong> {{moment(event.date_end, moment.HTML5_FMT.DATETIME_LOCAL).fromNow()}}
+        </div>
+        <span class="float-right mb-2" style="cursor: pointer;">
+            <span class="link-black text-sm" (click)="getEventComments(event.id)" [id]="'event-comment-button-' + event.id" >
+                <i class="far fa-comments mr-1"></i> Comments ({{event.comments?.length || event?.total_comments}})
+            </span>
         </span>
-    </p>
+    </div>
     <form class="form-horizontal">
         <div class="input-group input-group-sm mb-0">
-            <input class="form-control form-control-sm" placeholder="Type a comment">
+            <input class="form-control form-control-sm" 
+                [id]="'event-comment-' + event.id" 
+                placeholder="Comenta sobre el evento" (focus)="enableComments(event.id)">
             <div class="input-group-append">
-                <button type="submit" class="btn btn-danger">Send</button>
+                <button (click)="addComment($event, event.id)" 
+                    class="btn btn-danger">Comentar</button>
             </div>
         </div>
     </form>
+    <div class="comment-zone p-2 text-justify position-relative">
+
+        <div class="post p-2 border-0" style="font-size: .78rem;" 
+            *ngFor="let comment of event.comments">
+            <div class="user-block" style="font-size: .78rem;">
+                <img class="img-circle img-bordered-sm" [src]="comment.user_profile_details?.profile_image" alt="user image">
+                <span class="username" style="font-size: .78rem;">
+                    <a href="#">{{comment.user_profile_details?.user_details.first_name}}
+                        {{comment.user_profile_details?.user_details.last_name}}</a>
+                </span>
+                <span class="description" style="font-size: .78rem;">{{ moment(comment.date_created,
+                    moment.HTML5_FMT.DATETIME_LOCAL).add(-5, 'hours').fromNow() }}</span>
+            </div>
+            <p class="pl-4 pr-4 position-relative" style="top: -16px; right: -26px">
+                {{comment.content}}
+            </p>
+        </div>
+
+    </div>
 </div>
