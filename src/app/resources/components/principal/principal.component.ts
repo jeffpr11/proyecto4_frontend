@@ -22,6 +22,8 @@ export class PrincipalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
+    this.loader = true;
     this.resourceService.getResources().subscribe({
       next: (page: Paginator<Resource>) => {
 
@@ -34,6 +36,7 @@ export class PrincipalComponent implements OnInit {
         this.routeService.navigate(['/', 'recursos']);
       }
     });
+    
   }
 
   public filterByField(value: string) {

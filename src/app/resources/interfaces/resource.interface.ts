@@ -7,7 +7,7 @@ export interface Resource extends GeneralFields {
         name: string,
         user_last_name: string,
         user_first_name: string
-    },
+    }[],
     resource_file?: File,
     name: string,
     route: string,
