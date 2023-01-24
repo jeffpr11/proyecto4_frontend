@@ -41,6 +41,7 @@ export class EditComponent implements OnInit {
           this.group = group;
           this.groupParent = group.principal_group;
           this.groupName = (group.level === 0) ? this.appConfig.mainGroupName : this.appConfig.subGroupName;
+          
           this.buildForm();
           // this.editFormGroup.setValue(this.group);
 
@@ -64,7 +65,7 @@ export class EditComponent implements OnInit {
     if (event.target.files.length > 0) {
       
       const file = event.target.files[0];
-      this.editFormGroup.get('group_image').setValue(file);
+      this.group.group_image_file = file;
 
     }
 

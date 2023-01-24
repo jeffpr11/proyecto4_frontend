@@ -79,6 +79,9 @@
                     </div>
 
                     <div class="card-body">
+                        <app-emptypage style="font-size: .4em;" *ngIf="!loader && events.length == 0" 
+                            class="col-sm-12 text-center font-weight-light" [iconClass]="'fas fa-layer-group'" 
+                            [message]="'Sin eventos para mostrar'"></app-emptypage>
                         <div *ngFor="let event of events | slice: 0:3">
                             <strong>
                                 <i class="fas fa-calendar-day"></i> {{event.name}}</strong>

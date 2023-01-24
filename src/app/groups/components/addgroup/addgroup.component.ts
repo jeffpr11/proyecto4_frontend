@@ -18,6 +18,8 @@ import { GroupService } from '../../services/group/group.service';
 })
 export class AddGroupComponent implements OnInit {
 
+  file: File;
+  newGroup: Group;
   groupName: string;
   groupId: number = 0;
   leaderProfiles: Profile[];
@@ -54,11 +56,7 @@ export class AddGroupComponent implements OnInit {
   public loadGroupImage(event: any) {
     
     if (event.target.files.length > 0) {
-      
-      const file = event.target.files[0];
-      this.principalGroupForm.get('group_image').setValue(file);
-
-    }
+      this.file = event.target.files[0]; }
 
   }
 
@@ -74,7 +72,7 @@ export class AddGroupComponent implements OnInit {
       group_image: ['', [
         Validators.required
       ]],
-      user_profile: ['Seleccione al lider de ' + this.groupName?.toLowerCase(), [
+      group_leader: ['Seleccione al lider de ' + this.groupName?.toLowerCase(), [
         Validators.required, 
         Validators.min(1), 
         Validators.pattern('^[1-9]+$')]
@@ -87,17 +85,18 @@ export class AddGroupComponent implements OnInit {
 
     if( this.principalGroupForm.valid ) {
 
-      let newGroup: Group = this.principalGroupForm.value;
+      this.newGroup = this.principalGroupForm.value;
+      this.newGroup.group_image_file = this.file;
       
-      newGroup.level = 0;
-      newGroup.principal_group = this.groupId == 0 ? null : this.groupId;
+      this.newGroup.level = 0;
+      this.newGroup.principal_group = this.groupId == 0 ? null : this.groupId;
       
       let groupRequest = this.groupId == 0 ? 
-        this.groupService.addGroup(newGroup) :
+        this.groupService.addGroup(this.newGroup) :
         this.groupService.getGroupById(this.groupId).pipe(
           switchMap( (group: Group) => {
-            newGroup.level = group.level + 1;
-            return this.groupService.addGroup(newGroup)
+            this.newGroup.level = group.level + 1;
+            return this.groupService.addGroup(this.newGroup)
           })
         );
       

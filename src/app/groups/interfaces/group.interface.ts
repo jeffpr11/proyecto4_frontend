@@ -10,6 +10,7 @@ export interface Group extends GeneralFields {
     description: string,
     group_image?: string,
     group_leader: number,
+    group_image_file?: File,
     principal_group: number,
     leader_details?: Profile,
 }

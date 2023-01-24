@@ -41,8 +41,8 @@
                                 formControlName="group_leader">
                                 <option selected>Seleccione al lider de {{groupName.toLowerCase()}}</option>
                                 <option *ngFor="let profile of leaderProfiles" [value]="profile.id">
-                                    {{profile.card_id}} - {{profile.user_details.first_name}}
-                                    {{profile.user_details.last_name}}
+                                    {{profile.card_id}} - {{profile.user_details?.first_name}}
+                                    {{profile.user_details?.last_name}}
                                 </option>
                             </select>
                             <span

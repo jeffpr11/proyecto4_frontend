@@ -21,7 +21,7 @@
       <div class="col-sm-12">
       </div>
       <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
-      <app-emptypage *ngIf="resources.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
+      <app-emptypage *ngIf="!loader && resources.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
         [message]="'No existen recursos que mostrar'">
       </app-emptypage>
       <div class="card card-success col-sm-12">
@@ -36,11 +36,11 @@
                     {{ resource.name }}
                   </h4>
                   <div class="attachment-text align-items-baseline">
-                    <span *ngIf="resource.groups_details.length > 0"><strong>Grupo:</strong> {{
-                      resource.groups_details[0].name }}</span><br>
-                    <span *ngIf="resource.groups_details.length > 0"><strong>Líder de grupo:</strong> {{
-                      resource.groups_details[0].leader_details.user_details.first_name }} {{
-                      resource.groups_details[0].leader_details.user_details.last_name }}
+                    <span *ngIf="resource.groups_details != null"><strong>Grupo:</strong> {{
+                      resource.groups_details.name }}</span><br>
+                    <span *ngIf="resource.groups_details != null"><strong>Líder de grupo:</strong> {{
+                      resource.groups_details.user_first_name }} 
+                      {{resource.groups_details.user_last_name }}
                       <a (click)="downloadFile(resource)"
                         class="btn btn-default btn-sm position-absolute display-absolute" style="right: 20px;">
                         <i class="fas fa-download"></i> Descargar</a>

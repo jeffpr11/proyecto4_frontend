@@ -19,7 +19,7 @@ export interface GroupEvent extends GeneralFields {
     event_image?: string,
     type?: GroupEventType,
     user_profile: number,
-    event_image_file: File,
+    event_image_file?: File,
     total_comments: number,
     user_profile_details?: {
         user_details: {

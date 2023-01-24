@@ -69,7 +69,7 @@ export class GroupService {
     formData.append("name", group.name);
     formData.append("level", group.level.toString());
     formData.append("description", group.description);
-    formData.append("group_image", group.group_image);
+    formData.append("group_image", group.group_image_file);
     formData.append("group_leader", group.group_leader.toString());
     if( group.principal_group != null) { 
       formData.append("principal_group", group.principal_group.toString()); }
@@ -87,8 +87,11 @@ export class GroupService {
     formData.append("name", group.name);
     formData.append("description", group.description);
     formData.append("level", group.level.toString());
-    formData.append("group_image", group.group_image);
     formData.append("group_leader", group.group_leader.toString());
+    
+    if( group.group_image_file != null ) {
+      formData.append("group_image", group.group_image_file); }
+    
     if( group.principal_group != null) { 
       formData.append("principal_group", group.principal_group.toString()); }
 

@@ -17,9 +17,10 @@ import { Paginator } from 'src/app/core/interfaces/paginator.interface';
 })
 export class AddresourceComponent implements OnInit {
 
-  principalResourceForm: FormGroup;
+  file: File;
   groupsList: Group[];
   subgroupsList: Group[];
+  principalResourceForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -43,8 +44,11 @@ export class AddresourceComponent implements OnInit {
   }
   
   public addResource () {
+
     if( this.principalResourceForm.valid ) {
+      
       let newResource: Resource = this.principalResourceForm.value;
+      newResource.resource_file = this.file;
 
       newResource.groups = (this.principalResourceForm.get('subgroups').value !== "")
         ? this.principalResourceForm.get('subgroups').value : newResource.groups;
@@ -58,15 +62,16 @@ export class AddresourceComponent implements OnInit {
         }
       })
     }
+
   }
   
   public onRecursoFile (event: any) {
+    
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.principalResourceForm.get('route').setValue(file);
-    }
+      this.file = event.target.files[0]; }
+    
   }
-
+  
   public onChangeGroups () {
     let groupId = this.principalResourceForm.get('groups').value;
     this.groupService.getGroupsByOwner(localStorage.getItem('username'), groupId).subscribe({

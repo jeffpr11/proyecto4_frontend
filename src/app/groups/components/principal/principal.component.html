@@ -20,7 +20,7 @@
         </div>
         <div class="row m-3">
             <app-loader class="col-sm-12" [isActive]="loader"></app-loader>
-            <app-emptypage *ngIf="groups.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
+            <app-emptypage *ngIf="!loader && groups.length == 0" class="col-sm-12" [iconClass]="'fas fa-layer-group'"
                 [message]="'No existen grupos que mostrar'">
             </app-emptypage>
 

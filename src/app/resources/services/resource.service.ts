@@ -39,8 +39,8 @@ export class ResourceService {
     Utils.setGeneralFields(mainResource);
 
     const formData = new FormData();
-    formData.append('route', mainResource.route);
     formData.append('name', mainResource.name);
+    formData.append('route', mainResource.resource_file);
     formData.append('groups', mainResource.groups[0].toString());
 
     return this.httpClient.post<Resource>(`${this.MAIN_RESOURCE_URL}/`, formData);
